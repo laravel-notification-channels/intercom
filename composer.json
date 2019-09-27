@@ -1,0 +1,48 @@
+{
+    "name": "laravel-notification-channels/intercom",
+    "description": "Intercom Notifications Driver",
+    "homepage": "https://github.com/laravel-notification-channels/intercom",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrey Telesh",
+            "email": "andrey.telesh.y@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "guzzlehttp/guzzle": "^6.3",
+        "intercom/intercom-php": "^3.2",
+        "illuminate/notifications": "~5.5 || ~6.0",
+        "illuminate/support": "~5.5 || ~6.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.1",
+        "phpunit/phpunit": "~8.0.0",
+        "scrutinizer/ocular": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "NotificationChannels\\Intercom\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NotificationChannels\\Intercom\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "ocular-code-coverage-upload": "vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover --repository=g/laravel-notification-channels/intercom"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NotificationChannels\\Intercom\\IntercomServiceProvider"
+            ]
+        }
+    }
+}
