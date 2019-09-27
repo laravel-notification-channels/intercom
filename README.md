@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/intercom.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/intercom)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://scrutinizer-ci.com/g/laravel-notification-channels/intercom/badges/build.png?b=master)](https://scrutinizer-ci.com/g/laravel-notification-channels/intercom/build-status/master)
-[![StyleCI](https://styleci.io/repos/148610087/shield)](https://styleci.io/repos/148610087)
+[![StyleCI](https://styleci.io/repos/211259850/shield)](https://styleci.io/repos/211259850)
 [![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/intercom.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/intercom)
 [![Code Coverage](https://scrutinizer-ci.com/g/laravel-notification-channels/intercom/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/laravel-notification-channels/intercom/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/intercom.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/intercom)
