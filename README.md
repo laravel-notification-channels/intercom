@@ -33,15 +33,7 @@ composer require laravel-notification-channels/intercom
 
 ### Setting up the Intercom service
 
-Once installed you need to register the service provider with the application. Open up `config/app.php` and find the `providers` key.
-
-``` php
-'providers' => [
-    \NotificationChannels\Intercom\IntercomServiceProvider::class,
-]
-```
-
-Put the followings to your `config/services.php`
+Add the followings to your `config/services.php`
 
 ``` php
 'intercom' => [
