@@ -2,11 +2,11 @@
 
 namespace NotificationChannels\Intercom;
 
-use Intercom\IntercomClient;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\ServiceProvider;
+use Intercom\IntercomClient;
 
 class IntercomServiceProvider extends ServiceProvider
 {
