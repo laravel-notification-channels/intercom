@@ -2,10 +2,10 @@
 
 namespace NotificationChannels\Intercom\Tests;
 
-use GuzzleHttp\Psr7\Request;
-use PHPUnit\Framework\TestCase;
-use NotificationChannels\Intercom\Exceptions\RequestException;
 use GuzzleHttp\Exception\RequestException as BaseRequestException;
+use GuzzleHttp\Psr7\Request;
+use NotificationChannels\Intercom\Exceptions\RequestException;
+use PHPUnit\Framework\TestCase;
 
 class RequestExceptionTest extends TestCase
 {

@@ -2,15 +2,15 @@
 
 namespace NotificationChannels\Intercom\Tests;
 
-use PHPUnit\Framework\TestCase;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Notifications\ChannelManager;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Notifications\ChannelManager;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Notification;
 use NotificationChannels\Intercom\IntercomChannel;
 use NotificationChannels\Intercom\IntercomServiceProvider;
-use NotificationChannels\Intercom\Tests\Mocks\TestFakeApplication;
 use NotificationChannels\Intercom\Tests\Mocks\TestConfigRepository;
+use NotificationChannels\Intercom\Tests\Mocks\TestFakeApplication;
+use PHPUnit\Framework\TestCase;
 
 class IntercomServiceProviderTest extends TestCase
 {

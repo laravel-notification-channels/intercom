@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\Intercom\Exceptions;
 
-use Throwable;
 use GuzzleHttp\Exception\RequestException as BaseRequestException;
+use Throwable;
 
 class RequestException extends IntercomException
 {

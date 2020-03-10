@@ -2,12 +2,12 @@
 
 namespace NotificationChannels\Intercom;
 
-use Intercom\IntercomClient;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Notifications\Notification;
-use GuzzleHttp\Exception\BadResponseException;
-use NotificationChannels\Intercom\Exceptions\RequestException;
+use Intercom\IntercomClient;
 use NotificationChannels\Intercom\Exceptions\MessageIsNotCompleteException;
+use NotificationChannels\Intercom\Exceptions\RequestException;
 
 /**
  * Class IntercomNotificationChannel.

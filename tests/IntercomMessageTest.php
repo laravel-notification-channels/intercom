@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\Intercom\Tests;
 
-use PHPUnit\Framework\TestCase;
 use NotificationChannels\Intercom\IntercomMessage;
+use PHPUnit\Framework\TestCase;
 
 class IntercomMessageTest extends TestCase
 {

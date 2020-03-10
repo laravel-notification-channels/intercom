@@ -2,19 +2,19 @@
 
 namespace NotificationChannels\Intercom\Tests;
 
-use Mockery;
-use Mockery\Mock;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Psr7\Request;
 use Intercom\IntercomClient;
 use Intercom\IntercomMessages;
+use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use GuzzleHttp\Exception\BadResponseException;
+use Mockery\Mock;
+use NotificationChannels\Intercom\Exceptions\MessageIsNotCompleteException;
+use NotificationChannels\Intercom\Exceptions\RequestException;
 use NotificationChannels\Intercom\IntercomChannel;
 use NotificationChannels\Intercom\IntercomMessage;
 use NotificationChannels\Intercom\Tests\Mocks\TestNotifiable;
-use NotificationChannels\Intercom\Exceptions\RequestException;
 use NotificationChannels\Intercom\Tests\Mocks\TestNotification;
-use NotificationChannels\Intercom\Exceptions\MessageIsNotCompleteException;
 
 class IntercomChannelTest extends MockeryTestCase
 {

@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\Intercom\Exceptions;
 
-use Throwable;
 use NotificationChannels\Intercom\IntercomMessage;
+use Throwable;
 
 class MessageIsNotCompleteException extends IntercomException
 {
