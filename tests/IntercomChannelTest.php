@@ -37,7 +37,7 @@ class IntercomChannelTest extends MockeryTestCase
     {
         parent::setUp();
 
-        $this->intercom = new IntercomClient(null, null);
+        $this->intercom = new IntercomClient('', null);
         $this->intercomMessages = Mockery::mock(IntercomMessages::class, $this->intercom);
         $this->intercom->messages = $this->intercomMessages;
         $this->channel = new IntercomChannel($this->intercom);
