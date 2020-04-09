@@ -20,7 +20,7 @@ class IntercomServiceProvider extends ServiceProvider
             ->give(static function () {
                 /* @var Config $config */
                 return new IntercomClient(
-                    Config::get('services.intercom.token'),
+                    Config::get('services.intercom.token', ''),
                     null
                 );
             });
