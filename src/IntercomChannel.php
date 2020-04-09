@@ -4,11 +4,11 @@ namespace NotificationChannels\Intercom;
 
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
+use Http\Client\Exception as HttpClientException;
 use Illuminate\Notifications\Notification;
 use Intercom\IntercomClient;
 use NotificationChannels\Intercom\Exceptions\MessageIsNotCompleteException;
 use NotificationChannels\Intercom\Exceptions\RequestException;
-use Http\Client\Exception as HttpClientException;
 
 /**
  * Class IntercomNotificationChannel.
@@ -72,7 +72,7 @@ class IntercomChannel
     {
         /** @var IntercomMessage $message */
         $message = $notification->toIntercom($notifiable);
-        if (!$message->toIsGiven()) {
+        if (! $message->toIsGiven()) {
             if (false === $to = $notifiable->routeNotificationFor('intercom')) {
                 throw new MessageIsNotCompleteException($message, 'Recipient is not provided');
             }
@@ -80,7 +80,7 @@ class IntercomChannel
             $message->to($to);
         }
 
-        if (!$message->isValid()) {
+        if (! $message->isValid()) {
             throw new MessageIsNotCompleteException(
                 $message,
                 'The message is not valid. Please check that you have filled required params'
