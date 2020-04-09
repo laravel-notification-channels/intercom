@@ -4,6 +4,7 @@ namespace NotificationChannels\Intercom;
 
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
+use Http\Client\Exception as HttpClientException;
 use Illuminate\Notifications\Notification;
 use Intercom\IntercomClient;
 use NotificationChannels\Intercom\Exceptions\MessageIsNotCompleteException;
@@ -37,6 +38,7 @@ class IntercomChannel
      *
      * @throws MessageIsNotCompleteException When message is not filled correctly
      * @throws GuzzleException               Other Guzzle uncatched exceptions
+     * @throws HttpClientException           Other HTTP uncatched exceptions
      * @throws RequestException              When server responses with a bad HTTP code
      *
      * @see https://developers.intercom.com/intercom-api-reference/reference#admin-initiated-conversation
@@ -64,6 +66,7 @@ class IntercomChannel
      *
      * @throws MessageIsNotCompleteException
      * @throws GuzzleException
+     * @throws HttpClientException
      */
     protected function sendNotification($notifiable, Notification $notification): void
     {

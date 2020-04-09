@@ -41,15 +41,6 @@ class IntercomServiceProviderTest extends TestCase
         $this->serviceProvider->boot();
     }
 
-    public function testItBootsAndProvidesDIForIntercomClientFromConfig(): void
-    {
-        Config::set('services.intercom.token', 'SOME_TOKEN');
-        /** @var IntercomChannel $client */
-        $client = $this->app->make(IntercomChannel::class);
-
-        self::assertEquals('SOME_TOKEN', $client->getClient()->getAuth()[0]);
-    }
-
     public function testItRegistersNewIntercomNotificationDriverAlias(): void
     {
         $this->serviceProvider->register();
