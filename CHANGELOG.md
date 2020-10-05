@@ -2,7 +2,7 @@
 
 All notable changes to **Intercom Notification** will be documented in this file
 
-## 2.0.0 - 2020-10-05
+## 1.2.0 - 2020-10-05
 
 - Added Laravel 8 support.
 - Dropped Laravel 5 support.
