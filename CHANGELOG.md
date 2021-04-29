@@ -2,6 +2,10 @@
 
 All notable changes to **Intercom Notification** will be documented in this file
 
+## 1.4.0 - ????-??-??
+
+- Search for `Intercom\IntercomClient::class` top level binds at first
+
 ## 1.3.0 - 2020-10-05
 
 - Added Laravel 8 support.

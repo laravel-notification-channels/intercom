@@ -15,15 +15,17 @@ class IntercomServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->when(IntercomChannel::class)
-            ->needs(IntercomClient::class)
-            ->give(static function () {
-                /* @var Config $config */
-                return new IntercomClient(
-                    Config::get('services.intercom.token', ''),
-                    null
-                );
-            });
+        if (!$this->app->has(IntercomClient::class)) {
+            $this->app->when(IntercomChannel::class)
+                ->needs(IntercomClient::class)
+                ->give(static function () {
+                    /* @var Config $config */
+                    return new IntercomClient(
+                        Config::get('services.intercom.token', ''),
+                        null
+                    );
+                });
+        }
     }
 
     /**
