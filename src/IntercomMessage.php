@@ -2,7 +2,7 @@
 
 namespace NotificationChannels\Intercom;
 
-class IntercomMessage
+final class IntercomMessage
 {
     public const TYPE_EMAIL = 'email';
 
@@ -25,7 +25,12 @@ class IntercomMessage
     /**
      * @var array
      */
-    public $payload;
+    public $payload = [];
+
+    /**
+     * @var string|null
+     */
+    public $conversationId = null;
 
     /**
      * @param string|null $body
@@ -78,7 +83,9 @@ class IntercomMessage
      */
     public function subject(string $value): self
     {
-        $this->payload['subject'] = $value;
+        if (!empty($value)) {
+            $this->payload['subject'] = $value;
+        }
 
         return $this;
     }
@@ -104,18 +111,54 @@ class IntercomMessage
     }
 
     /**
+     * @param array $value
+     *
+     * @return IntercomMessage
+     */
+    public function from(array $value): self
+    {
+        $this->payload['from'] = $value;
+
+        return $this;
+    }
+
+    /**
      * @param string $adminId
      *
      * @return IntercomMessage
      */
-    public function from(string $adminId): self
+    public function fromAdminId(string $adminId): self
     {
-        $this->payload['from'] = [
+        return $this->from([
             'type' => 'admin',
-            'id'   => $adminId,
-        ];
+            'id' => $adminId,
+        ]);
+    }
 
-        return $this;
+    /**
+     * @param string $userId
+     *
+     * @return IntercomMessage
+     */
+    public function fromUserId(string $userId): self
+    {
+        return $this->from([
+            'type' => 'user',
+            'id' => $userId,
+        ]);
+    }
+
+    /**
+     * @param string $userEmail
+     *
+     * @return IntercomMessage
+     */
+    public function fromUserEmail(string $userEmail): self
+    {
+        return $this->from([
+            'type' => 'user',
+            'email' => $userEmail,
+        ]);
     }
 
     /**
@@ -137,12 +180,10 @@ class IntercomMessage
      */
     public function toUserId(string $id): self
     {
-        $this->payload['to'] = [
+        return $this->to([
             'type' => 'user',
-            'id'   => $id,
-        ];
-
-        return $this;
+            'id' => $id,
+        ]);
     }
 
     /**
@@ -152,12 +193,10 @@ class IntercomMessage
      */
     public function toUserEmail(string $email): self
     {
-        $this->payload['to'] = [
-            'type'  => 'user',
+        return $this->to([
+            'type' => 'user',
             'email' => $email,
-        ];
-
-        return $this;
+        ]);
     }
 
     /**
@@ -167,10 +206,22 @@ class IntercomMessage
      */
     public function toContactId(string $id): self
     {
-        $this->payload['to'] = [
+        return $this->to([
             'type' => 'contact',
-            'id'   => $id,
-        ];
+            'id' => $id,
+        ]);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return IntercomMessage
+     */
+    public function toConversationId(string $id): self
+    {
+        if (!empty($id)) {
+            $this->conversationId = $id;
+        }
 
         return $this;
     }
@@ -190,7 +241,7 @@ class IntercomMessage
     /**
      * @return bool
      */
-    public function toIsGiven(): bool
+    public function hasRecipient(): bool
     {
         return isset($this->payload['to']);
     }
@@ -201,5 +252,29 @@ class IntercomMessage
     public function toArray(): array
     {
         return $this->payload;
+    }
+
+    public function getConversationBody(): array
+    {
+        $body = [
+            'message_type' => 'comment',
+            'body' => $this->payload['body'] ?? null,
+        ];
+
+        if ($this->isValid()) {
+            $body['type'] = $this->payload['to']['type'];
+
+            if ($body['type'] === 'admin') {
+                $body['admin_id'] = $this->payload['to']['type'];
+            } else {
+                if (!empty($this->payload['to']['email'])) {
+                    $body['email'] = $this->payload['to']['email'];
+                } else {
+                    $body['user_id'] = $this->payload['to']['id'] ?? null;
+                }
+            }
+        }
+
+        return $body;
     }
 }

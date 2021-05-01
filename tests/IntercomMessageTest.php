@@ -5,7 +5,7 @@ namespace NotificationChannels\Intercom\Tests;
 use NotificationChannels\Intercom\IntercomMessage;
 use PHPUnit\Framework\TestCase;
 
-class IntercomMessageTest extends TestCase
+final class IntercomMessageTest extends TestCase
 {
     public function testThatTypeInappConstantSetCorrectly(): void
     {
@@ -84,11 +84,11 @@ class IntercomMessageTest extends TestCase
     public function testThatSenderCanBeSet(): void
     {
         $message = new IntercomMessage();
-        $message->from(123);
+        $message->fromAdminId('123');
         self::assertEquals(
             [
                 'type' => 'admin',
-                'id'   => 123,
+                'id' => '123',
             ],
             $message->payload['from']
         );
@@ -98,7 +98,7 @@ class IntercomMessageTest extends TestCase
     {
         $message = new IntercomMessage();
         $expected = [
-            'type'  => 'user',
+            'type' => 'user',
             'email' => 'foo@bar.baz',
         ];
         $message->to($expected);
@@ -109,11 +109,11 @@ class IntercomMessageTest extends TestCase
     public function testThatRecipientUserIdCanBeSet(): void
     {
         $message = new IntercomMessage();
-        $message->toUserId(456);
+        $message->toUserId('456');
         self::assertEquals(
             [
                 'type' => 'user',
-                'id'   => 456,
+                'id' => '456',
             ],
             $message->payload['to']
         );
@@ -125,7 +125,7 @@ class IntercomMessageTest extends TestCase
         $message->toUserEmail('foo@bar.com');
         self::assertEquals(
             [
-                'type'  => 'user',
+                'type' => 'user',
                 'email' => 'foo@bar.com',
             ],
             $message->payload['to']
@@ -139,7 +139,7 @@ class IntercomMessageTest extends TestCase
         self::assertEquals(
             [
                 'type' => 'contact',
-                'id'   => 789,
+                'id' => 789,
             ],
             $message->payload['to']
         );
@@ -148,10 +148,10 @@ class IntercomMessageTest extends TestCase
     public function testItCanDetermiteIfToIsNotGiven(): void
     {
         $message = new IntercomMessage();
-        self::assertFalse($message->toIsGiven());
+        self::assertFalse($message->hasRecipient());
 
-        $message->toUserId(123);
-        self::assertTrue($message->toIsGiven());
+        $message->toUserId('123');
+        self::assertTrue($message->hasRecipient());
     }
 
     public function testInCanDetermineWhenRequiredParamsAreNotSet(): void
@@ -162,10 +162,10 @@ class IntercomMessageTest extends TestCase
         $message->body('Some body');
         self::assertFalse($message->isValid());
 
-        $message->from(123);
+        $message->fromAdminId('123');
         self::assertFalse($message->isValid());
 
-        $message->toUserId(321);
+        $message->toUserId('321');
         self::assertTrue($message->isValid());
     }
 
@@ -176,24 +176,25 @@ class IntercomMessageTest extends TestCase
         $message
             ->email()
             ->personal()
-            ->from(123)
+            ->fromAdminId('123')
             ->toUserEmail('recipient@foo.bar')
             ->subject('Test case')
-            ->body('Some message');
+            ->body('Some message')
+            ->toConversationId('123');
 
         $expected = [
             'message_type' => 'email',
-            'template'     => 'personal',
-            'from'         => [
+            'template' => 'personal',
+            'from' => [
                 'type' => 'admin',
-                'id'   => '123',
+                'id' => '123',
             ],
-            'to'           => [
-                'type'  => 'user',
+            'to' => [
+                'type' => 'user',
                 'email' => 'recipient@foo.bar',
             ],
-            'subject'      => 'Test case',
-            'body'         => 'Some message',
+            'subject' => 'Test case',
+            'body' => 'Some message',
         ];
 
         self::assertEquals($expected, $message->toArray());

@@ -13,7 +13,7 @@ use NotificationChannels\Intercom\Exceptions\RequestException;
 /**
  * Class IntercomNotificationChannel.
  */
-class IntercomChannel
+final class IntercomChannel
 {
     /**
      * @var IntercomClient
@@ -68,27 +68,33 @@ class IntercomChannel
      * @throws GuzzleException
      * @throws HttpClientException
      */
-    protected function sendNotification($notifiable, Notification $notification): void
+    private function sendNotification($notifiable, Notification $notification): void
     {
         /** @var IntercomMessage $message */
         $message = $notification->toIntercom($notifiable);
-        if (! $message->toIsGiven()) {
-            if (false === $to = $notifiable->routeNotificationFor('intercom')) {
+
+        if (!$message->hasRecipient() && !$message->conversationId) {
+            $to = $notifiable->routeNotificationFor('intercom');
+            if (!$to) {
                 throw new MessageIsNotCompleteException($message, 'Recipient is not provided');
             }
 
             $message->to($to);
         }
 
-        if (! $message->isValid()) {
-            throw new MessageIsNotCompleteException(
-                $message,
-                'The message is not valid. Please check that you have filled required params'
-            );
+        if (!$message->isValid()) {
+            throw new MessageIsNotCompleteException($message, 'The message is not valid. Please check that you have filled required params');
         }
 
-        $this->client->messages->create(
-            $message->toArray()
-        );
+        if ($message->conversationId) {
+            $this->client->conversations->replyToConversation(
+                $message->conversationId,
+                $message->getConversationBody()
+            );
+        } else {
+            $this->client->messages->create(
+                $message->toArray()
+            );
+        }
     }
 }
