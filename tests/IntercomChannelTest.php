@@ -47,7 +47,7 @@ class IntercomChannelTest extends MockeryTestCase
     {
         $notification = new TestNotification(
             IntercomMessage::create('Hello World!')
-                ->from(123)
+                ->fromAdminId(123)
                 ->toUserId(321)
         );
 
@@ -74,7 +74,7 @@ class IntercomChannelTest extends MockeryTestCase
     {
         $notification = new TestNotification(
             IntercomMessage::create('Hello World!')
-                ->from(123)
+                ->fromAdminId(123)
         );
 
         $this->expectException(MessageIsNotCompleteException::class);
@@ -85,7 +85,7 @@ class IntercomChannelTest extends MockeryTestCase
     {
         $notification = new TestNotification(
             IntercomMessage::create()
-                ->from(123)
+                ->fromAdminId(123)
                 ->toUserId(321)
         );
 
@@ -101,7 +101,7 @@ class IntercomChannelTest extends MockeryTestCase
 
         $notification = new TestNotification(
             IntercomMessage::create('Hello World!')
-                ->from(123)
+                ->fromAdminId(123)
                 ->toUserId(321)
         );
 
@@ -115,7 +115,7 @@ class IntercomChannelTest extends MockeryTestCase
         $this->intercomMessages->shouldReceive('create');
 
         $message = IntercomMessage::create('Hello World!')
-            ->from(123);
+            ->fromAdminId(123);
         $notification = new TestNotification($message);
 
         $expected = ['type' => 'user', 'id' => 321];

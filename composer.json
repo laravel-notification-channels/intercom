@@ -11,10 +11,11 @@
     ],
     "require": {
         "php": ">=7.2",
-        "guzzlehttp/guzzle": "^6.3 || ^7.0",
-        "intercom/intercom-php": "^3.2 || ^4.0",
+        "guzzlehttp/guzzle": "^7.0",
         "illuminate/notifications": "~6.0 || ~7.0 || ~8.0",
-        "illuminate/support": "~6.0 || ~7.0 || ~8.0"
+        "illuminate/support": "~6.0 || ~7.0 || ~8.0",
+        "intercom/intercom-php": "^4.4",
+        "php-http/guzzle7-adapter": "^1.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.3",

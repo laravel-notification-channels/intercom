@@ -13,7 +13,7 @@ use NotificationChannels\Intercom\Exceptions\RequestException;
 /**
  * Class IntercomNotificationChannel.
  */
-class IntercomChannel
+final class IntercomChannel
 {
     /**
      * @var IntercomClient
@@ -21,7 +21,7 @@ class IntercomChannel
     private $client;
 
     /**
-     * @param IntercomClient $client
+     * @param  IntercomClient  $client
      */
     public function __construct(IntercomClient $client)
     {
@@ -31,15 +31,14 @@ class IntercomChannel
     /**
      * Send the given notification via Intercom API.
      *
-     * @param mixed        $notifiable
-     * @param Notification $notification
-     *
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
      * @return void
      *
      * @throws MessageIsNotCompleteException When message is not filled correctly
-     * @throws GuzzleException               Other Guzzle uncatched exceptions
-     * @throws HttpClientException           Other HTTP uncatched exceptions
-     * @throws RequestException              When server responses with a bad HTTP code
+     * @throws GuzzleException Other Guzzle uncatched exceptions
+     * @throws HttpClientException Other HTTP uncatched exceptions
+     * @throws RequestException When server responses with a bad HTTP code
      *
      * @see https://developers.intercom.com/intercom-api-reference/reference#admin-initiated-conversation
      */
@@ -61,19 +60,21 @@ class IntercomChannel
     }
 
     /**
-     * @param mixed        $notifiable
-     * @param Notification $notification
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
      *
      * @throws MessageIsNotCompleteException
      * @throws GuzzleException
      * @throws HttpClientException
      */
-    protected function sendNotification($notifiable, Notification $notification): void
+    private function sendNotification($notifiable, Notification $notification): void
     {
         /** @var IntercomMessage $message */
         $message = $notification->toIntercom($notifiable);
-        if (! $message->toIsGiven()) {
-            if (false === $to = $notifiable->routeNotificationFor('intercom')) {
+
+        if (! $message->hasRecipient() && ! $message->conversationId) {
+            $to = $notifiable->routeNotificationFor('intercom');
+            if (! $to) {
                 throw new MessageIsNotCompleteException($message, 'Recipient is not provided');
             }
 
@@ -81,14 +82,18 @@ class IntercomChannel
         }
 
         if (! $message->isValid()) {
-            throw new MessageIsNotCompleteException(
-                $message,
-                'The message is not valid. Please check that you have filled required params'
-            );
+            throw new MessageIsNotCompleteException($message, 'The message is not valid. Please check that you have filled required params');
         }
 
-        $this->client->messages->create(
-            $message->toArray()
-        );
+        if ($message->conversationId) {
+            $this->client->conversations->replyToConversation(
+                $message->conversationId,
+                $message->getConversationBody()
+            );
+        } else {
+            $this->client->messages->create(
+                $message->toArray()
+            );
+        }
     }
 }
