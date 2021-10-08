@@ -13,8 +13,7 @@ final class IntercomMessage
     public const TEMPLATE_PERSONAL = 'personal';
 
     /**
-     * @param string $body
-     *
+     * @param  string  $body
      * @return IntercomMessage
      */
     public static function create(?string $body = null): self
@@ -33,7 +32,7 @@ final class IntercomMessage
     public $conversationId = null;
 
     /**
-     * @param string|null $body
+     * @param  string|null  $body
      */
     public function __construct(?string $body = null)
     {
@@ -45,8 +44,7 @@ final class IntercomMessage
     }
 
     /**
-     * @param string $body
-     *
+     * @param  string  $body
      * @return IntercomMessage
      */
     public function body(string $body): self
@@ -77,13 +75,12 @@ final class IntercomMessage
     }
 
     /**
-     * @param string $value
-     *
+     * @param  string  $value
      * @return IntercomMessage
      */
     public function subject(string $value): self
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->payload['subject'] = $value;
         }
 
@@ -111,8 +108,7 @@ final class IntercomMessage
     }
 
     /**
-     * @param array $value
-     *
+     * @param  array  $value
      * @return IntercomMessage
      */
     public function from(array $value): self
@@ -123,8 +119,7 @@ final class IntercomMessage
     }
 
     /**
-     * @param string $adminId
-     *
+     * @param  string  $adminId
      * @return IntercomMessage
      */
     public function fromAdminId(string $adminId): self
@@ -136,8 +131,7 @@ final class IntercomMessage
     }
 
     /**
-     * @param string $userId
-     *
+     * @param  string  $userId
      * @return IntercomMessage
      */
     public function fromUserId(string $userId): self
@@ -149,8 +143,7 @@ final class IntercomMessage
     }
 
     /**
-     * @param string $userEmail
-     *
+     * @param  string  $userEmail
      * @return IntercomMessage
      */
     public function fromUserEmail(string $userEmail): self
@@ -162,8 +155,7 @@ final class IntercomMessage
     }
 
     /**
-     * @param array $value
-     *
+     * @param  array  $value
      * @return IntercomMessage
      */
     public function to(array $value): self
@@ -174,8 +166,7 @@ final class IntercomMessage
     }
 
     /**
-     * @param string $id
-     *
+     * @param  string  $id
      * @return IntercomMessage
      */
     public function toUserId(string $id): self
@@ -187,8 +178,7 @@ final class IntercomMessage
     }
 
     /**
-     * @param string $email
-     *
+     * @param  string  $email
      * @return IntercomMessage
      */
     public function toUserEmail(string $email): self
@@ -200,8 +190,7 @@ final class IntercomMessage
     }
 
     /**
-     * @param string $id
-     *
+     * @param  string  $id
      * @return IntercomMessage
      */
     public function toContactId(string $id): self
@@ -213,13 +202,12 @@ final class IntercomMessage
     }
 
     /**
-     * @param string $id
-     *
+     * @param  string  $id
      * @return IntercomMessage
      */
     public function toConversationId(string $id): self
     {
-        if (!empty($id)) {
+        if (! empty($id)) {
             $this->conversationId = $id;
         }
 
@@ -267,7 +255,7 @@ final class IntercomMessage
             if ($body['type'] === 'admin') {
                 $body['admin_id'] = $this->payload['to']['type'];
             } else {
-                if (!empty($this->payload['to']['email'])) {
+                if (! empty($this->payload['to']['email'])) {
                     $body['email'] = $this->payload['to']['email'];
                 } else {
                     $body['user_id'] = $this->payload['to']['id'] ?? null;

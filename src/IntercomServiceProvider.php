@@ -15,7 +15,7 @@ class IntercomServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (!$this->app->has(IntercomClient::class)) {
+        if (! $this->app->has(IntercomClient::class)) {
             $this->app->when(IntercomChannel::class)
                 ->needs(IntercomClient::class)
                 ->give(static function () {
