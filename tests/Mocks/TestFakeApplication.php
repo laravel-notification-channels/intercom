@@ -29,9 +29,6 @@ class TestFakeApplication extends Container implements ApplicationContract
     {
     }
 
-
-
-
     /**
      * {@inheritdoc}
      */

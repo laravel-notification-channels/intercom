@@ -13,8 +13,7 @@ class IntercomMessage
     public const TEMPLATE_PERSONAL = 'personal';
 
     /**
-     * @param string $body
-     *
+     * @param  string  $body
      * @return IntercomMessage
      */
     public static function create(?string $body = null): self
@@ -28,7 +27,7 @@ class IntercomMessage
     public $payload;
 
     /**
-     * @param string|null $body
+     * @param  string|null  $body
      */
     public function __construct(?string $body = null)
     {
@@ -40,8 +39,7 @@ class IntercomMessage
     }
 
     /**
-     * @param string $body
-     *
+     * @param  string  $body
      * @return IntercomMessage
      */
     public function body(string $body): self
@@ -72,8 +70,7 @@ class IntercomMessage
     }
 
     /**
-     * @param string $value
-     *
+     * @param  string  $value
      * @return IntercomMessage
      */
     public function subject(string $value): self
@@ -104,8 +101,7 @@ class IntercomMessage
     }
 
     /**
-     * @param string $adminId
-     *
+     * @param  string  $adminId
      * @return IntercomMessage
      */
     public function from(string $adminId): self
@@ -119,8 +115,7 @@ class IntercomMessage
     }
 
     /**
-     * @param array $value
-     *
+     * @param  array  $value
      * @return IntercomMessage
      */
     public function to(array $value): self
@@ -131,8 +126,7 @@ class IntercomMessage
     }
 
     /**
-     * @param string $id
-     *
+     * @param  string  $id
      * @return IntercomMessage
      */
     public function toUserId(string $id): self
@@ -146,8 +140,7 @@ class IntercomMessage
     }
 
     /**
-     * @param string $email
-     *
+     * @param  string  $email
      * @return IntercomMessage
      */
     public function toUserEmail(string $email): self
@@ -161,8 +154,7 @@ class IntercomMessage
     }
 
     /**
-     * @param string $id
-     *
+     * @param  string  $id
      * @return IntercomMessage
      */
     public function toContactId(string $id): self

@@ -14,7 +14,7 @@ class TestNotifiable
     private $to;
 
     /**
-     * @param bool|array $to
+     * @param  bool|array  $to
      */
     public function __construct($to = false)
     {

@@ -21,7 +21,7 @@ class IntercomChannel
     private $client;
 
     /**
-     * @param IntercomClient $client
+     * @param  IntercomClient  $client
      */
     public function __construct(IntercomClient $client)
     {
@@ -31,15 +31,14 @@ class IntercomChannel
     /**
      * Send the given notification via Intercom API.
      *
-     * @param mixed        $notifiable
-     * @param Notification $notification
-     *
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
      * @return void
      *
      * @throws MessageIsNotCompleteException When message is not filled correctly
-     * @throws GuzzleException               Other Guzzle uncatched exceptions
-     * @throws HttpClientException           Other HTTP uncatched exceptions
-     * @throws RequestException              When server responses with a bad HTTP code
+     * @throws GuzzleException Other Guzzle uncatched exceptions
+     * @throws HttpClientException Other HTTP uncatched exceptions
+     * @throws RequestException When server responses with a bad HTTP code
      *
      * @see https://developers.intercom.com/intercom-api-reference/reference#admin-initiated-conversation
      */
@@ -61,8 +60,8 @@ class IntercomChannel
     }
 
     /**
-     * @param mixed        $notifiable
-     * @param Notification $notification
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
      *
      * @throws MessageIsNotCompleteException
      * @throws GuzzleException

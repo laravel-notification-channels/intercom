@@ -13,7 +13,7 @@ class TestNotification extends Notification
     private $intercomMessage;
 
     /**
-     * @param IntercomMessage $intercomMessage
+     * @param  IntercomMessage  $intercomMessage
      */
     public function __construct(IntercomMessage $intercomMessage)
     {
