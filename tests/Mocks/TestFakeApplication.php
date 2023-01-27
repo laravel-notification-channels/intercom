@@ -18,6 +18,23 @@ class TestFakeApplication extends Container implements ApplicationContract
     /**
      * {@inheritdoc}
      */
+    public function maintenanceMode()
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function terminating($callback)
+    {
+    }
+
+
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function basePath($path = '')
     {
     }
@@ -144,7 +161,7 @@ class TestFakeApplication extends Container implements ApplicationContract
     /**
      * {@inheritdoc}
      */
-    public function storagePath()
+    public function storagePath($path = '')
     {
     }
 
