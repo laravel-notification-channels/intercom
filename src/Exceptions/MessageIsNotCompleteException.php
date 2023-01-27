@@ -13,10 +13,10 @@ class MessageIsNotCompleteException extends IntercomException
     private $intercomMessage;
 
     /**
-     * @param IntercomMessage $intercomMessage
-     * @param string          $message
-     * @param int             $code
-     * @param Throwable|null  $previous
+     * @param  IntercomMessage  $intercomMessage
+     * @param  string  $message
+     * @param  int  $code
+     * @param  Throwable|null  $previous
      */
     public function __construct(
         IntercomMessage $intercomMessage,
